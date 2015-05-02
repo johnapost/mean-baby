@@ -1,0 +1,19 @@
+{
+  "name": "mean-baby",
+  "version": "0.0.1",
+  "description": "Mean Baby",
+  "main": "src/app.coffee",
+  "scripts": {
+    "postinstall": "bower install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnapost/mean-baby.git"
+  },
+  "author": "John Apostol <notimetobeidle@gmail.com>",
+  "license": "DO NOT COPY",
+  "bugs": {
+    "url": "https://github.com/johnapost/mean-baby/issues"
+  },
+  "homepage": "https://github.com/johnapost/mean-baby"
+}
