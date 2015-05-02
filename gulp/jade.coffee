@@ -1,5 +1,5 @@
 gulp = require 'gulp'
-changed = require 'gulp-changed'
+newer = require 'gulp-newer'
 cached = require 'gulp-cached'
 inheritance = require 'gulp-jade-inheritance'
 debug = require 'gulp-debug'
@@ -15,7 +15,7 @@ errorHandler = (error) ->
 
 gulp.task 'jade', ->
   gulp.src 'src/**/*.jade'
-    .pipe changed config.path, extension: '.html'
+    .pipe newer dest: config.path, ext: '.html'
 
     .pipe cached 'jade'
     .pipe inheritance basedir: 'src'

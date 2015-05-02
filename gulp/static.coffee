@@ -1,7 +1,7 @@
 gulp = require 'gulp'
-changed = require 'gulp-changed'
+newer = require 'gulp-newer'
 concat = require 'gulp-concat'
-uglify = require 'gulp-uglifyjs'
+uglify = require 'gulp-uglify'
 minifycss = require 'gulp-minify-css'
 config = require './config.coffee'
 
@@ -13,7 +13,7 @@ gulp.task 'vendor', ->
     'bower_components/velocity/velocity.min.js'
     'bower_components/velocity/velocity.ui.min.js'
   ]
-  .pipe changed "#{config.path}/scripts"
+  .pipe newer "#{config.path}/scripts"
   .pipe uglify()
   .pipe concat 'vendor.js'
   .pipe gulp.dest "#{config.path}/scripts"

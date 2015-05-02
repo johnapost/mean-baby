@@ -7,7 +7,7 @@ sourcemaps = require 'gulp-sourcemaps'
 coffee = require 'gulp-coffee'
 concat = require 'gulp-concat'
 chmod = require 'gulp-chmod'
-uglify = require 'gulp-uglifyjs'
+uglify = require 'gulp-uglify'
 config = require './config.coffee'
 
 errorHandler = (error) ->
