@@ -7,12 +7,9 @@ app = express()
 app.use bodyParser.json()
 
 app.get '/api/posts', (req, res) ->
-  res.json [
-    {
-      username: 'johnapost'
-      body: 'Node rocks!'
-    }
-  ]
+  Post.find (err, posts) ->
+    return next(err) if err
+    res.json posts
 
 app.post '/api/posts', (req, res, next) ->
   post = new Post {
@@ -22,7 +19,7 @@ app.post '/api/posts', (req, res, next) ->
 
   post.save (err, post) ->
     return next(err) if err
-    res.json 201, post
+    res.status(201).json(post)
 
 app.listen 3000, ->
   console.log 'Server listening on 3000'
