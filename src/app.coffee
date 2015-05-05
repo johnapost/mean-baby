@@ -1,5 +1,5 @@
 # Create angular app
-app = angular.module 'meanBaby', ['ngMaterial', 'ngAnimate']
+app = angular.module 'meanBaby', []
 
 # Make Modernizr injectable
 app.constant 'Modernizr', Modernizr
