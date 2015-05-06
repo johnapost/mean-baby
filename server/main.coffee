@@ -29,4 +29,4 @@ app.post '/api/posts', (req, res, next) ->
     res.status(201).json(post)
 
 app.listen 3000, ->
-  console.log 'Server listening on 3000'
+  console.log 'Server listening on :3000'
