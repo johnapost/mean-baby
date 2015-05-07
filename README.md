@@ -9,10 +9,36 @@ Getting Started
     npm install
     gulp
 
+Directory Structure
+-------------------
+
+    root
+    |-dist
+    |-gulp
+    |-server
+    | |-controllers
+    | |-models
+    | |-db.coffee
+    | |-main.coffee
+    | `-server.js
+    `-src
+      |-components
+      | `-component
+      |   |-component.coffee
+      |   |-component.jade
+      |   `-component.scss
+      |-partials
+      | `-head.jade
+      |-views
+      | `-index.jade
+      |-_mixins.scss
+      |-app.coffee
+      `-app.scss
+
 Tests
 -----
 
-No tests currently planned. This is meant as a learning project for myself to practice building a NodeJS API and serving it to an AngularJS app. Unit tests would be handled in AngularJS and feature tests would be handled in Protractor.
+Front end tests are done with Protractor. Back end tests TBD.
 
 Contributing
 ------------
