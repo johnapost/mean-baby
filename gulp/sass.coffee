@@ -24,7 +24,7 @@ gulp.task 'sass', ->
     .pipe prefix(browsers: ['> 1%', 'last 2 versions'])
     .pipe minifycss()
     .pipe rename('app.css')
-    .pipe chmod(755)
+    .pipe chmod 755
 
     .pipe sourcemaps.write()
     .pipe gulp.dest("#{config.path}/styles")
@@ -33,12 +33,13 @@ gulp.task 'sass', ->
 
 gulp.task 'sassProduction', ->
   gulp.src 'src/app.scss'
+
     .pipe sass(style: 'expanded')
     .on 'error', errorHandler
     .pipe prefix(browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1'])
     .pipe minifycss()
     .pipe rename('app.css')
-    .pipe chmod(755)
+    .pipe chmod 755
 
     .pipe gulp.dest("#{config.path}/styles")
     .pipe filter('**/*.css')
