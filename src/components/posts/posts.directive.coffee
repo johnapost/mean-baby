@@ -1,17 +1,20 @@
 app.directive 'posts', [
-  ->
+  'Post'
+  (Post) ->
     restrict: 'A'
     link: (scope, element, attrs) ->
-      scope.posts = [
-        {username: 'johnapost', body: 'Node rules!'}
-        {username: 'aimwill', body: 'jQuery rules!'}
-      ]
+      Post.getPosts().success (data) ->
+        scope.posts = data
 
       scope.addPost = ->
         if scope.postBody
-          scope.posts.unshift
+
+          input =
             username: 'johnapost'
             body: scope.postBody
+
+          Post.addPost(input).success (data) ->
+            scope.posts.unshift input
 
           scope.postBody = null
 ]

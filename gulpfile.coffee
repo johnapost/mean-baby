@@ -36,6 +36,7 @@ gulp.task 'default', [
   'sass',
   'coffee',
   'images',
+  'api',
   'serve'
 ]
 
