@@ -1,7 +1,6 @@
 express = require 'express'
 bodyParser = require 'body-parser'
 db = require './db'
-Post = require './models/post'
 
 allowCrossDomain = (req, res, next) ->
   res.header 'Access-Control-Allow-Origin', 'http://192.168.1.11:4000'
@@ -9,24 +8,14 @@ allowCrossDomain = (req, res, next) ->
   res.header 'Access-Control-Allow-Headers', 'Content-Type'
   next()
 
+# Define App
 app = express()
 app.use bodyParser.json()
 app.use allowCrossDomain
 
-app.get '/api/posts', (req, res) ->
-  Post.find().sort('-date').exec (err, posts) ->
-    return next(err) if err
-    res.json posts
+# Routes
+app.use '/api/posts', require './controllers/posts'
 
-app.post '/api/posts', (req, res, next) ->
-  post = new Post {
-    username: req.body.username
-    body: req.body.body
-  }
-
-  post.save (err, post) ->
-    return next(err) if err
-    res.status(201).json(post)
-
+# Start API server
 app.listen 3000, ->
   console.log 'Server listening on :3000'
