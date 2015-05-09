@@ -10,18 +10,24 @@ chmod = require 'gulp-chmod'
 annotate = require 'gulp-ng-annotate'
 uglify = require 'gulp-uglify'
 config = require './config.coffee'
+plumber = require 'gulp-plumber'
+notify = require 'gulp-notify'
 
-errorHandler = (error) ->
+errorAlert = (error) ->
+  notify.onError(
+    title: 'Coffee Error'
+    message: 'Check your terminal!'
+  )(error)
   console.log error.toString()
   this.emit 'end'
 
 gulp.task 'coffee', ->
   gulp.src 'src/**/*.coffee'
+    .pipe plumber errorHandler: errorAlert
     .pipe newer "#{config.path}/scripts/app.js"
     .pipe sourcemaps.init()
 
     .pipe coffee(bare: true)
-    .on 'error', errorHandler
     .pipe remember 'coffee'
     .pipe concat('app.js')
     .pipe chmod 755
@@ -31,9 +37,9 @@ gulp.task 'coffee', ->
 
 gulp.task 'coffeeProduction', ->
   gulp.src 'src/**/*.coffee'
+    .pipe plumber errorHandler: errorAlert
 
     .pipe coffee(bare: true)
-    .on 'error', errorHandler
     .pipe remember 'coffee'
     .pipe concat('app.js')
     .pipe annotate()
