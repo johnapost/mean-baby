@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/johnapost/mean-baby",
   "devDependencies": {
+    "bcrypt": "^0.8.3",
     "body-parser": "^1.12.3",
     "browser-sync": "^2.6.9",
     "coffee-script": "^1.9.2",
@@ -45,6 +46,7 @@
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0",
     "jwt-simple": "^0.3.0",
+    "lodash": "^3.8.0",
     "merge-stream": "^0.1.7",
     "mongoose": "^4.0.2",
     "run-sequence": "^1.1.0",
