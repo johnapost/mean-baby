@@ -8,13 +8,20 @@ chmod = require 'gulp-chmod'
 filter = require 'gulp-filter'
 rename = require 'gulp-rename'
 config = require './config.coffee'
+plumber = require 'gulp-plumber'
+notify = require 'gulp-notify'
 
-errorHandler = (error) ->
+errorAlert = (error) ->
+  notify.onError(
+    title: 'Jade Error'
+    message: 'Check your terminal!'
+  )(error)
   console.log error.toString()
   this.emit 'end'
 
 gulp.task 'jade', ->
   gulp.src 'src/**/*.jade'
+    .pipe plumber errorHandler: errorAlert
     .pipe newer dest: config.path, ext: '.html'
 
     .pipe cached 'jade'
@@ -24,7 +31,6 @@ gulp.task 'jade', ->
       /views/.test file.path
 
     .pipe jade()
-    .on 'error', errorHandler
     .pipe chmod(755)
 
     .pipe rename (file) ->
