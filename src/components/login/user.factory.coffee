@@ -1,6 +1,7 @@
 app.factory 'User', [
   '$http'
-  ($http) ->
+  '$rootScope'
+  ($http, $rootScope) ->
     path = window.location.origin.replace ':4000', ':3000'
 
     factory =
@@ -9,7 +10,8 @@ app.factory 'User', [
           "#{path}/api/users"
           headers:
             'X-Auth': factory.token
-        )
+        ).success (data) ->
+          $rootScope.$broadcast 'login', data
 
       login: (username, password) ->
         $http.post(

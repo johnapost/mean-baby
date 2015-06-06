@@ -5,6 +5,4 @@ app.directive 'login', [
     link: (scope, element, attrs) ->
       scope.login = (username, password) ->
         User.login username, password
-          .then (user) ->
-            console.log user
 ]
