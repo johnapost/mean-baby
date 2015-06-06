@@ -1,5 +1,5 @@
 # Create angular app
-app = angular.module 'meanBaby', []
+app = angular.module 'meanBaby', ['ngRoute']
 
 # Make Modernizr injectable
 app.constant 'Modernizr', Modernizr
