@@ -1,17 +1,20 @@
-app.directive 'posts', (Post) ->
-  restrict: 'A'
-  link: (scope, element, attrs) ->
-    Post.getPosts().success (data) ->
-      scope.posts = data
+app.directive 'posts', [
+  'Post'
+  (Post) ->
+    restrict: 'A'
+    link: (scope, element, attrs) ->
+      Post.getPosts().success (data) ->
+        scope.posts = data
 
-    scope.addPost = ->
-      if scope.postBody
+      scope.addPost = ->
+        if scope.postBody
 
-        input =
-          username: 'johnapost'
-          body: scope.postBody
+          input =
+            username: 'johnapost'
+            body: scope.postBody
 
-        Post.addPost(input).success (data) ->
-          scope.posts.unshift input
+          Post.addPost(input).success (data) ->
+            scope.posts.unshift input
 
-        scope.postBody = null
+          scope.postBody = null
+]

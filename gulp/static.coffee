@@ -11,6 +11,7 @@ gulp.task 'vendor', ->
     'bower_components/modernizr/modernizr.js'
     'bower_components/jquery/dist/jquery.min.js'
     'bower_components/angular/angular.min.js'
+    'bower_components/angular-route/angular-route.min.js'
     'bower_components/velocity/velocity.min.js'
     'bower_components/velocity/velocity.ui.min.js'
     'bower_components/bootstrap/dist/js/bootstrap.min.js'

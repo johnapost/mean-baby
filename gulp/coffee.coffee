@@ -7,7 +7,6 @@ sourcemaps = require 'gulp-sourcemaps'
 coffee = require 'gulp-coffee'
 concat = require 'gulp-concat'
 chmod = require 'gulp-chmod'
-annotate = require 'gulp-ng-annotate'
 uglify = require 'gulp-uglify'
 config = require './config.coffee'
 plumber = require 'gulp-plumber'
@@ -42,7 +41,6 @@ gulp.task 'coffeeProduction', ->
     .pipe coffee(bare: true)
     .pipe remember 'coffee'
     .pipe concat('app.js')
-    .pipe annotate()
     .pipe uglify()
     .pipe chmod 755
 
