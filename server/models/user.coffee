@@ -6,6 +6,7 @@ User = db.model 'User', {
     required: true
   password:
     type: String
+    required: true
     select: false
 }
 
