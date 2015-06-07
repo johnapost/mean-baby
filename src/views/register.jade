@@ -1,0 +1,11 @@
+.container(login)
+  form(ng-submit='register(username, password)')
+    .form-group
+      label Username
+      input.form-control(type='text' ng-model='username')
+
+    .form-group
+      label Password
+      input.form-control(type='password' ng-model='password')
+
+    input.btn.btn-success.btn-lg.btn-block(type='submit' value='Register')
