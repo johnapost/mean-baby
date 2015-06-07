@@ -10,10 +10,10 @@ router.post '/', (req, res, next) ->
     .select 'username'
     .exec (err, user) ->
       return next err if err
-      return res.sendStatusStatus 401 unless user
+      return res.sendStatus 401 unless user
       bcrypt.compare req.body.password, user.password, (err, valid) ->
         return next err if err
-        return res.sendStatusStatus 401 unless valid
+        return res.sendStatus 401 unless valid
         token = jwt.encode username: user.username, config.secret
         res.json token
 

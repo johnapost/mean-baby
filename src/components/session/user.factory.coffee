@@ -35,4 +35,10 @@ app.factory 'User', [
           factory.token = val.data
           $http.defaults.headers.common['X-Auth'] = val.data
           factory.getUser()
+
+      logout: ->
+        factory.token = undefined
+        factory.username = undefined
+        $http.defaults.headers.common['X-Auth'] = undefined
+        $rootScope.$broadcast 'logout'
 ]

@@ -8,4 +8,8 @@ app.directive 'nav', [
 
       scope.$on 'getUser', ->
         scope.currentUser.username = User.username
+
+      scope.$on 'logout', ->
+        scope.currentUser =
+          username: undefined
 ]
