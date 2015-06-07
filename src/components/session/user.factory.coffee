@@ -1,8 +1,9 @@
 app.factory 'User', [
   '$http'
   '$rootScope'
-  ($http, $rootScope) ->
-    path = window.location.origin.replace ':4000', ':3000'
+  '$window'
+  ($http, $rootScope, $window) ->
+    path = $window.location.origin.replace ':4000', ':3000'
 
     factory =
       createUser: (username, password) ->
@@ -19,7 +20,7 @@ app.factory 'User', [
         $http.get(
           "#{path}/api/users"
           headers:
-            'X-Auth': factory.token
+            'X-Auth': $window.localStorage.token
         ).success (data) ->
           factory.username = data.username
           $rootScope.$broadcast 'getUser'
@@ -32,13 +33,13 @@ app.factory 'User', [
             password: password
           }
         ).then (val) ->
-          factory.token = val.data
+          $window.localStorage.token = val.data
           $http.defaults.headers.common['X-Auth'] = val.data
           factory.getUser()
 
       logout: ->
-        factory.token = undefined
-        factory.username = undefined
-        $http.defaults.headers.common['X-Auth'] = undefined
+        $window.localStorage.removeItem 'token'
+        factory.username = null
+        $http.defaults.headers.common['X-Auth'] = null
         $rootScope.$broadcast 'logout'
 ]

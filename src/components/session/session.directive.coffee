@@ -1,8 +1,11 @@
 app.directive 'session', [
   'User'
-  (User) ->
+  '$window'
+  (User, $window) ->
     restrict: 'A'
     link: (scope, element, attrs) ->
+      User.getUser() if 'token' of $window.localStorage
+
       scope.login = (username, password) ->
         User.login username, password
 
