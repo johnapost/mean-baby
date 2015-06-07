@@ -11,10 +11,11 @@ allowCrossDomain = (req, res, next) ->
   res.header 'Access-Control-Allow-Headers', ['Content-Type', 'X-Auth']
   next()
 
-# Define App
+# Define App and Middleware
 app = express()
 app.use bodyParser.json()
 app.use allowCrossDomain
+app.use require './auth'
 
 # Routes
 app.use '/api/posts', require './controllers/posts'

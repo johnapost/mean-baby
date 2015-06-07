@@ -1,9 +1,11 @@
 app.directive 'nav', [
-  ->
+  'User'
+  (User) ->
     restrict: 'A'
     link: (scope, element, attrs) ->
-      scope.currentUser = {}
+      scope.currentUser =
+        username: User.username
 
-      scope.$on 'login', (broadcasted_scope, data) ->
-        scope.currentUser.username = data.username
+      scope.$on 'setUser', ->
+        scope.currentUser.username = User.username
 ]

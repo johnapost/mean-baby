@@ -2,7 +2,7 @@ User = require '../models/user'
 router = require('express').Router()
 bcrypt = require 'bcrypt'
 jwt = require 'jwt-simple'
-config = require '../../config'
+config = require '../config'
 
 router.post '/', (req, res, next) ->
   User.findOne username: req.body.username

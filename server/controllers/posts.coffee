@@ -8,12 +8,12 @@ router.get '/', (req, res) ->
 
 router.post '/', (req, res, next) ->
   post = new Post {
-    username: req.body.username
+    username: req.auth.username
     body: req.body.body
   }
 
   post.save (err, post) ->
     return next(err) if err
-    res.status(201).json(post)
+    res.status(201).json post
 
 module.exports = router

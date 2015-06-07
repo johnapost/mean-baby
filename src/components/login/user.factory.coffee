@@ -5,13 +5,14 @@ app.factory 'User', [
     path = window.location.origin.replace ':4000', ':3000'
 
     factory =
-      getUser: ->
+      setUser: ->
         $http.get(
           "#{path}/api/users"
           headers:
             'X-Auth': factory.token
         ).success (data) ->
-          $rootScope.$broadcast 'login', data
+          factory.username = data.username
+          $rootScope.$broadcast 'setUser'
 
       login: (username, password) ->
         $http.post(
@@ -22,5 +23,6 @@ app.factory 'User', [
           }
         ).then (val) ->
           factory.token = val.data
-          factory.getUser()
+          $http.defaults.headers.common['X-Auth'] = val.data
+          factory.setUser()
 ]

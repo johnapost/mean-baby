@@ -2,7 +2,7 @@ User = require '../models/user'
 router = require('express').Router()
 bcrypt = require 'bcrypt'
 jwt = require 'jwt-simple'
-config = require '../../config'
+config = require '../config'
 
 router.get '/', (req, res, next) ->
   return res.sendStatus 401 unless req.headers['x-auth']
