@@ -1,8 +1,10 @@
 db = require '../db'
+Schema = require('mongoose').Schema
 
 Post = db.model 'Post', {
-  username:
-    type: String
+  _user:
+    type: Schema.Types.ObjectId
+    ref: 'User'
     required: true
   body:
     type: String

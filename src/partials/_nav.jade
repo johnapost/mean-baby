@@ -4,5 +4,6 @@ nav.navbar.navbar-default(nav)
       li: a(href='/#/') Posts
       li: a(href='/#/register') Register
       li: a(href='/#/login') Login
+      li: a(href='/#/login' ng-click='logout()' ng-if='currentUser.username') Logout
 
     p.navbar-text.navbar-right(ng-if='currentUser.username') Signed in as {{currentUser.username}}

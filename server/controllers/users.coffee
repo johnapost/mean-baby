@@ -2,13 +2,13 @@ User = require '../models/user'
 router = require('express').Router()
 bcrypt = require 'bcrypt'
 jwt = require 'jwt-simple'
-config = require '../../config'
+config = require '../config'
 
 router.get '/', (req, res, next) ->
   return res.sendStatus 401 unless req.headers['x-auth']
 
   auth = jwt.decode req.headers['x-auth'], config.secret
-  User.findOne username: auth.username, (err, user) ->
+  User.findOne _id: auth.userId, (err, user) ->
     return next err if err
     res.json user
 

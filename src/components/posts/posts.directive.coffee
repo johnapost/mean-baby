@@ -1,6 +1,7 @@
 app.directive 'posts', [
   'Post'
-  (Post) ->
+  'User'
+  (Post, User) ->
     restrict: 'A'
     link: (scope, element, attrs) ->
       Post.getPosts().success (data) ->
@@ -10,7 +11,7 @@ app.directive 'posts', [
         if scope.postBody
 
           input =
-            username: 'johnapost'
+            userId: User.currentUser._id
             body: scope.postBody
 
           Post.addPost(input).success (data) ->
