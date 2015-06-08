@@ -11,7 +11,7 @@ app.directive 'posts', [
         if scope.postBody
 
           input =
-            username: User.username
+            userId: User.currentUser._id
             body: scope.postBody
 
           Post.addPost(input).success (data) ->

@@ -22,7 +22,7 @@ app.factory 'User', [
           headers:
             'X-Auth': $window.localStorage.token
         ).success (data) ->
-          factory.username = data.username
+          factory.currentUser = data
           $rootScope.$broadcast 'getUser'
 
       login: (username, password) ->
@@ -39,7 +39,7 @@ app.factory 'User', [
 
       logout: ->
         $window.localStorage.removeItem 'token'
-        factory.username = null
+        factory.currentUser = null
         $http.defaults.headers.common['X-Auth'] = null
         $rootScope.$broadcast 'logout'
 ]

@@ -14,7 +14,7 @@ router.post '/', (req, res, next) ->
       bcrypt.compare req.body.password, user.password, (err, valid) ->
         return next err if err
         return res.sendStatus 401 unless valid
-        token = jwt.encode username: user.username, config.secret
+        token = jwt.encode userId: user._id, config.secret
         res.json token
 
 module.exports = router

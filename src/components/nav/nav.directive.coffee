@@ -4,10 +4,10 @@ app.directive 'nav', [
     restrict: 'A'
     link: (scope, element, attrs) ->
       scope.currentUser =
-        username: User.username
+        username: null
 
       scope.$on 'getUser', ->
-        scope.currentUser.username = User.username
+        scope.currentUser.username = User.currentUser.username
 
       scope.$on 'logout', ->
         scope.currentUser =
