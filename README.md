@@ -46,9 +46,9 @@ I don't have tests in this project yet but this is what's planned:
 
 Simply ```npm test``` in order to run the suite.
 
-Client unit tests: Karma and Jasmine
-Server unit tests: TBD
-E2E tests: Protractor and Cucumber
+* Client unit tests: Karma and Jasmine
+* Server unit tests: TBD
+* E2E tests: Protractor and Cucumber
 
 Contributing
 ------------
