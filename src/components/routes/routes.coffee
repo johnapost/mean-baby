@@ -1,3 +1,4 @@
+# Routes
 app.config [
   '$routeProvider'
   ($routeProvider) ->
@@ -14,15 +15,36 @@ app.config [
       .otherwise redirectTo: '/'
 ]
 
+# Authentication
 app.run [
   '$rootScope'
   '$location'
   '$window'
+  '$http'
   'User'
-  ($rootScope, $location, $window, User) ->
-    User.getUser() if 'token' of $window.localStorage
+  ($rootScope, $location, $window, $http, User) ->
+
+    # Use token as auth header for each request
+    if 'token' of $window.localStorage
+      $http.defaults.headers.common['X-Auth'] = $window.localStorage.token
+
+    # Redirect to safe page if necessary
+    protectRoutes = ->
+
+      # Redirect to safe page if no token present
+      return $location.path '/register' unless 'token' of $window.localStorage
+
+      # Redirect to safe page if the token is invalid
+      User.getUser().error (message, code) ->
+        $location.path '/register' if code is 401 or code is 500
+      .success (data) ->
+        User.currentUser = data
+        $rootScope.$broadcast 'getUser'
+
+    protectRoutes()
 
     $rootScope.$on '$routeChangeStart', (event, next) ->
-      if next.requiresLogin
-        $location.path '/register' unless User.currentUser
+
+      # Check if the route requires login protection
+      protectRoutes() if next.requiresLogin
 ]
