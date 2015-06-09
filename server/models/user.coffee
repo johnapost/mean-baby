@@ -1,6 +1,6 @@
 db = require '../db'
 
-User = db.model 'User', {
+schema = db.Schema {
   username:
     type: String
     required: true
@@ -10,4 +10,4 @@ User = db.model 'User', {
     select: false
 }
 
-module.exports = User
+module.exports = db.model 'User', schema
