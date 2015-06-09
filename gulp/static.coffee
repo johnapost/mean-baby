@@ -3,7 +3,7 @@ newer = require 'gulp-newer'
 concat = require 'gulp-concat'
 uglify = require 'gulp-uglify'
 merge = require 'merge-stream'
-minifycss = require 'gulp-minify-css'
+csso = require 'gulp-csso'
 config = require './config.coffee'
 
 gulp.task 'vendor', ->
@@ -25,7 +25,7 @@ gulp.task 'vendor', ->
     'bower_components/bootstrap/dist/css/bootstrap.min.css'
   ]
   .pipe newer "#{config.path}/styles"
-  .pipe minifycss()
+  .pipe csso()
   .pipe concat 'vendor.css'
   .pipe gulp.dest "#{config.path}/styles"
 

@@ -4,7 +4,7 @@ newer = require 'gulp-newer'
 sourcemaps = require 'gulp-sourcemaps'
 sass = require 'gulp-sass'
 prefix = require 'gulp-autoprefixer'
-minifycss = require 'gulp-minify-css'
+csso = require 'gulp-csso'
 chmod = require 'gulp-chmod'
 filter = require 'gulp-filter'
 browserSync = require 'browser-sync'
@@ -28,7 +28,7 @@ gulp.task 'sass', ->
 
     .pipe sass(style: 'expanded')
     .pipe prefix(browsers: ['> 1%', 'last 2 versions'])
-    .pipe minifycss()
+    .pipe csso()
     .pipe rename('app.css')
     .pipe chmod 755
 
@@ -43,7 +43,7 @@ gulp.task 'sassProduction', ->
 
     .pipe sass(style: 'expanded')
     .pipe prefix(browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1'])
-    .pipe minifycss()
+    .pipe csso()
     .pipe rename('app.css')
     .pipe chmod 755
 
