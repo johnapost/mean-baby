@@ -1,9 +1,8 @@
 db = require '../db'
-Schema = require('mongoose').Schema
 
-Post = db.model 'Post', {
+schema = db.Schema {
   _user:
-    type: Schema.Types.ObjectId
+    type: db.Schema.Types.ObjectId
     ref: 'User'
     required: true
   body:
@@ -15,4 +14,4 @@ Post = db.model 'Post', {
     default: Date.now
 }
 
-module.exports = Post
+module.exports = db.model 'Post', schema

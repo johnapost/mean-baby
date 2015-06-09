@@ -5,6 +5,8 @@ jwt = require 'jwt-simple'
 config = require '../config'
 
 router.get '/', (req, res, next) ->
+
+  # Only authenticated users can use this route
   return res.sendStatus 401 unless req.headers['x-auth']
 
   auth = jwt.decode req.headers['x-auth'], config.secret
