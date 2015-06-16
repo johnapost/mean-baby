@@ -9,13 +9,14 @@ app.directive 'posts', [
 
       scope.addPost = ->
         if scope.postBody
-
           input =
             userId: User.currentUser._id
             body: scope.postBody
 
           Post.addPost(input).success (data) ->
-            scope.posts.unshift input
+            scope.posts.unshift
+              _user: username: scope.currentUser.username
+              body: input.body
 
           scope.postBody = null
 ]
