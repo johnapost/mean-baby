@@ -48,7 +48,7 @@ Simply ```npm test``` in order to run the suite.
 
 * Client unit tests: Karma and Jasmine
 * Server unit tests: TBD
-* E2E tests: Protractor and Cucumber
+* E2E tests: NightwatchJS
 
 Contributing
 ------------
