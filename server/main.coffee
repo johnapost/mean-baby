@@ -1,6 +1,6 @@
 express = require 'express'
 http = require 'http'
-socketIo = require 'socket.io'
+socket = require 'socket.io'
 bodyParser = require 'body-parser'
 jwt = require 'jwt-simple'
 bcrypt = require 'bcrypt'
@@ -25,7 +25,7 @@ app.use '/api/users', require './controllers/users'
 
 # Start API server
 server = http.createServer app
-io = socketIo.listen server
-app.set 'socketIo', io
+io = socket.listen server
+app.set 'socket', io
 app.set 'server', server
 app.get('server').listen 3000, -> console.log 'Server listening on :3000'

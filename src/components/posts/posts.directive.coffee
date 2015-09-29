@@ -1,7 +1,8 @@
 app.directive 'posts', [
   'Post'
   'User'
-  (Post, User) ->
+  'Socket'
+  (Post, User, Socket) ->
     restrict: 'A'
     link: (scope, element, attrs) ->
       Post.getPosts().success (data) ->
@@ -13,10 +14,12 @@ app.directive 'posts', [
             userId: User.currentUser._id
             body: scope.postBody
 
-          Post.addPost(input).success (data) ->
-            scope.posts.unshift
-              _user: username: scope.currentUser.username
-              body: input.body
-
+          Post.addPost input
           scope.postBody = null
+
+      # Live update
+      Socket.on 'post.created', (post) ->
+        scope.posts.unshift
+          _user: username: post._user.username
+          body: post.body
 ]

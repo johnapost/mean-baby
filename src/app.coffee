@@ -1,5 +1,5 @@
 # Create angular app
-app = angular.module 'meanBaby', ['ui.router']
+app = angular.module 'meanBaby', ['ui.router', 'btford.socket-io']
 
 # Make Modernizr injectable
 app.constant 'Modernizr', Modernizr
