@@ -4,8 +4,7 @@ app.factory 'Socket', [
   (socketFactory, $window) ->
     path = $window.location.origin.replace ':4000', ':3000'
 
-    connection: ->
-      socketFactory
-        prefix: ''
-        ioSocket: io.connect path
+    socketFactory
+      prefix: ''
+      ioSocket: io.connect path
 ]

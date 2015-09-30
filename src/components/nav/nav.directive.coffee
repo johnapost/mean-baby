@@ -6,7 +6,7 @@ app.directive 'nav', [
       scope.currentUser =
         username: null
 
-      scope.$on 'getUser', ->
+      scope.$on 'getUser', (ev, val) ->
         scope.currentUser.username = User.currentUser.username
 
       scope.$on 'logout', ->

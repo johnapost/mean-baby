@@ -21,7 +21,7 @@ app.directive 'posts', [
           scope.postBody = null
 
       # Live update
-      Socket.connection().on 'post.created', (post) ->
+      Socket.on 'post.created', (post) ->
         scope.posts.unshift
           _user: username: post._user.username
           body: post.body

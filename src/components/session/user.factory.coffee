@@ -2,9 +2,9 @@ app.factory 'User', [
   '$http'
   '$rootScope'
   '$window'
-  '$location'
+  '$state'
   'Socket'
-  ($http, $rootScope, $window, $location, Socket) ->
+  ($http, $rootScope, $window, $state, Socket) ->
     path = $window.location.origin.replace ':4000', ':3000'
 
     currentUser: ''
@@ -37,14 +37,12 @@ app.factory 'User', [
         $window.localStorage.token = val.data
         $http.defaults.headers.common['X-Auth'] = val.data
         @getUser().success (data) ->
-          @currentUser = data
-          $rootScope.$broadcast 'getUser'
-          $location.path '/'
+          $state.go 'index'
 
     logout: ->
       $window.localStorage.removeItem 'token'
       @currentUser = undefined
       $http.defaults.headers.common['X-Auth'] = undefined
-      Socket.connection().disconnect()
+      Socket.disconnect()
       $rootScope.$broadcast 'logout'
 ]

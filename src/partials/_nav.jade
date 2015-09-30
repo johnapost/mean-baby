@@ -6,4 +6,4 @@ nav.navbar.navbar-default(nav)
       li: a(ui-sref='login') Login
       li: a(ui-sref='login' ng-click='logout()' ng-if='currentUser.username') Logout
 
-    p.navbar-text.navbar-right(ng-if='currentUser.username') Signed in as {{currentUser.username}}
+    p.navbar-text.navbar-right(ng-if='currentUser.username') Signed in as {{::currentUser.username}}
