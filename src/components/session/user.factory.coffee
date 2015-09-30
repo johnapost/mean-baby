@@ -3,7 +3,8 @@ app.factory 'User', [
   '$rootScope'
   '$window'
   '$location'
-  ($http, $rootScope, $window, $location) ->
+  'Socket'
+  ($http, $rootScope, $window, $location, Socket) ->
     path = $window.location.origin.replace ':4000', ':3000'
 
     currentUser: ''
@@ -44,5 +45,6 @@ app.factory 'User', [
       $window.localStorage.removeItem 'token'
       @currentUser = undefined
       $http.defaults.headers.common['X-Auth'] = undefined
+      Socket.connection().disconnect()
       $rootScope.$broadcast 'logout'
 ]
