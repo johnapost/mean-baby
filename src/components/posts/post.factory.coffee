@@ -1,7 +1,8 @@
 app.factory 'Post', [
   '$http'
-  ($http) ->
-    path = window.location.origin.replace ':4000', ':3000'
+  '$window'
+  ($http, $window) ->
+    path = $window.location.origin.replace ':4000', ':3000'
 
     getPosts: ->
       $http.get(

@@ -23,6 +23,14 @@ router.post '/', (req, res, next) ->
 
   post.save (err, post) ->
     return next err if err
-    res.status(201).json post
+
+    Post.findOne({'_id': post._id}).populate('_user').exec (err, post) ->
+      return next err if err
+
+      # Update all connected users
+      socket = req.app.get 'socket'
+      socket.sockets.emit 'post.created', post
+
+      res.status(201).json post
 
 module.exports = router

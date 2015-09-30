@@ -1,8 +1,9 @@
 express = require 'express'
+http = require 'http'
+socket = require 'socket.io'
 bodyParser = require 'body-parser'
 jwt = require 'jwt-simple'
 bcrypt = require 'bcrypt'
-_ = require 'lodash'
 
 allowCrossDomain = (req, res, next) ->
   # res.header 'Access-Control-Allow-Origin', 'http://localhost:4000'
@@ -23,5 +24,8 @@ app.use '/api/sessions', require './controllers/sessions'
 app.use '/api/users', require './controllers/users'
 
 # Start API server
-app.listen 3000, ->
-  console.log 'Server listening on :3000'
+server = http.createServer app
+io = socket.listen server
+app.set 'socket', io
+app.set 'server', server
+app.get('server').listen 3000, -> console.log 'Server listening on :3000'
